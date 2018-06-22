@@ -1,6 +1,6 @@
 <?php
 
-namespace App\MeasurementsGateway\Domain\Model\Provider\IdentifiersFinder;
+namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders;
 
 use App\MeasurementsGateway\Domain\Model\Provider\Provider;
 

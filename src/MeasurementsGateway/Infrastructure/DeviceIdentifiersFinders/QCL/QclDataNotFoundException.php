@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders;
+namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders\QCL;
 
 /**
  * Description of QclDataNotFoundException

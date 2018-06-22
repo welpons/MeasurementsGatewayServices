@@ -2,7 +2,7 @@
 
 
 
-namespace App\MeasurementsGateway\Domain\Model\Provider\IdentifiersFinder;
+namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders;
 
 /**
  * Description of IndentifiersFinderNotFoundException

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace App\MeasurementsGateway\Domain\Model\Provider\IdentifiersFinder;
+namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders;
 
 use App\MeasurementsGateway\Domain\Model\Device\Identifiers\Identifiers;
 
@@ -24,7 +24,11 @@ interface IdentifiersFinderInterface
     public function findIdentifiers($rawData) : Identifiers;
     
     /**
-     * Retrieves from payload data to process
+     * Retrieves provider search key based on a standard type. 
+     * These search keys are used to find out identifiers in the payload 
+     * 
+     * @param string $identifierType
+     * @return array search array. 
      */
-    public function dataToProcress() : array;            
+    public function searchKey(string $identifierType) : string;     
 }

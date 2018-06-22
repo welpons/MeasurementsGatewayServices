@@ -27,7 +27,7 @@ class Provider
     public static function fromString(string $name, string $format, array $availableFormats = []): self
     {
         if(!empty($availableFormats) && !in_array(strtolower($format), $availableFormats)) {
-            throw new \InvalidArgumentException(sprintf('Wrong format. Available formats: %s', implode(',', $availableFormats)));
+            throw new InvalidProviderPayloadFormatException(sprintf('Wrong format. Available formats: %s', implode(',', $availableFormats)));
         }                 
         
         return new self($name, $format);
@@ -36,11 +36,11 @@ class Provider
     private function __construct(string $name, string $format)
     {
         if($name === '') {
-            throw new \InvalidArgumentException("Name must not be an empty string");
+            throw new InvalidProviderNameException("Name must not be an empty string");
         }
         
         if($name === '') {
-            throw new \InvalidArgumentException("Format must not be an empty string");
+            throw new InvalidProviderPayloadFormatException("Format must not be an empty string");
         }       
                
         

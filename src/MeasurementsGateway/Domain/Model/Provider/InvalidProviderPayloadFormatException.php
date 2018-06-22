@@ -6,14 +6,14 @@
  * and open the template in the editor.
  */
 
-namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders;
+namespace App\MeasurementsGateway\Domain\Model\Provider;
 
 /**
- * Description of FailedParsingPayloadException
+ * Description of InvalidProviderPayloadFormatException
  *
  * @author felix
  */
-class FailedParsingPayloadException extends \UnexpectedValueException
+class InvalidProviderPayloadFormatException extends \InvalidArgumentException
 {
     //put your code here
 }
