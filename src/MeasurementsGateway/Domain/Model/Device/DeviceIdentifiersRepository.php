@@ -6,14 +6,11 @@
  * and open the template in the editor.
  */
 
-namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders\LNI;
-
 /**
- * Description of QclDataNotFoundException
  *
  * @author felix
  */
-class LNIDataNotFoundException extends \Exception
+interface DeviceIdentifiersRepository 
 {
     //put your code here
 }

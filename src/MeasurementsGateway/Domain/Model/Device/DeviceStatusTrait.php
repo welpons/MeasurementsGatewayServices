@@ -6,14 +6,14 @@
  * and open the template in the editor.
  */
 
-namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders\LNI;
-
 /**
- * Description of QclDataNotFoundException
  *
  * @author felix
  */
-class LNIDataNotFoundException extends \Exception
-{
-    //put your code here
+trait DeviceStatusTrait 
+{    
+    private $connectionStatus;
+    private $inGoodConditions;
+    private $warranty;
+    private $comments;
 }

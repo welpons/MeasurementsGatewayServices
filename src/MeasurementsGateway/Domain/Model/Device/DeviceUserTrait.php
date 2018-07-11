@@ -7,11 +7,12 @@ namespace App\MeasurementsGateway\Domain\Model\UserDevice;
  *
  * @author felix
  */
-class UserDevice {
-
+trait DeviceUserTrait 
+{
     private $user;
-    private $subscription;
-    private $identifiers;
-    private $defaultIdentifier;
-    
+
+    public function user()
+    {
+        return $this->user;
+    }        
 }

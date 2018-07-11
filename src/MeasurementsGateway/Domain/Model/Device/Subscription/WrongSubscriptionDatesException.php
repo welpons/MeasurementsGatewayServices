@@ -6,13 +6,14 @@
  * and open the template in the editor.
  */
 
-namespace App\MeasurementsGateway\Domain\Model\Device\Identifiers;
+namespace App\MeasurementsGateway\Domain\Model\Device\Subscription;
 
 /**
+ * Description of WrongSubscriptionDatesException
  *
  * @author felix
  */
-interface IdentifierRespository 
+class WrongSubscriptionDatesException extends \Exception
 {
     //put your code here
 }

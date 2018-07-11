@@ -10,12 +10,39 @@ namespace App\MeasurementsGateway\Domain\Model\Device\Identifiers;
  * @author felix
  */
 class Identifiers implements \Iterator, \Countable 
-{
-    private $identifiers = [];
+{    
+    const DEFAULT_IDENTIFIER = true;
     
-    public function add(string $value, string $identifierType)
+    private $identifiers = [];
+    private $referenceIdentifier;
+    private $availableTypes;
+    
+    public function __construct(array $availableTypes = []) 
     {
-        $this->identifiers[$identifierType] = Identifier::fromString($value, $identifierType, IdentifierTypes::LISTING);
+        $this->availableTypes = $availableTypes;
+    }
+    
+    public function add(Identifier $identifier, $isReferenceIdentifier = false)
+    {
+        if(!empty($this->availableTypes) && !in_array(strtolower($identifier->type()), $this->availableTypes)) {
+            throw new IdentifierInvalidArgumentException(sprintf('Wrong identifier type. Available types: %s', implode(',', $this->availableTypes)));
+        }          
+        
+        $this->identifiers[$identifier->type()] = $identifier;
+       
+        if (true === $isReferenceIdentifier) {
+            $this->referenceIdentifier = $identifier;
+        }
+        
+        if (1 == $this->count() && false === $isReferenceIdentifier) {
+            $this->referenceIdentifier = $identifier;
+        }
+    }        
+    
+    public function addFromString(string $value, string $type, $isReferenceIdentifier = false)
+    {       
+        $identifier = Identifier::fromString($value, $type);          
+        $this->add($identifier, $isReferenceIdentifier); 
     }        
     
     public function current() 
@@ -23,7 +50,7 @@ class Identifiers implements \Iterator, \Countable
         return current($this->identifiers);
     }
 
-    public function key(): \scalar 
+    public function key()
     {
         return key($this->identifiers);
     }
@@ -46,5 +73,35 @@ class Identifiers implements \Iterator, \Countable
     public function count()
     {
         return count($this->identifiers);
+    }     
+    
+    public function exist(Identifier $newIdentifier)
+    {
+        if (empty($this->identifiers)) {
+            return false;
+        }
+        
+        foreach($this->identifiers as $identifier) {
+            if ($identifier == $newIdentifier) {
+                return true;
+            }
+        }
+
+        return false;
     }        
+    
+    public function referenceIdentifier()
+    {
+        return $this->referenceIdentifier;
+    }        
+    
+    public function changeReferenceIdentifier(Identifier $refIdentifier)
+    {
+        if (!$this->exist($refIdentifier)) {
+            $this->identifiers[$refIdentifier->type()] = $refIdentifier; 
+        }
+        
+        $this->referenceIdentifier = $refIdentifier;
+    }        
+    
 }

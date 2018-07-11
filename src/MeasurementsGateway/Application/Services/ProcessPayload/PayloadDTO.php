@@ -9,6 +9,7 @@
 namespace App\MeasurementsGateway\Application\Services\ProcessPayload;
 
 use App\MeasurementsGateway\Application\Services\DTOInterface;
+use App\MeasurementsGateway\Domain\Model\Provider\Provider;
 
 /**
  * Description of PayloadDTO
@@ -17,5 +18,45 @@ use App\MeasurementsGateway\Application\Services\DTOInterface;
  */
 class PayloadDTO implements DTOInterface
 {
-    //put your code here
+    /**
+     *
+     * @var mixed 
+     */
+    private $rawPayload;
+    
+    /**
+     *
+     * @var App\MeasurementsGateway\Domain\Model\Provider\Provider 
+     */
+    private $provider;
+    
+    /**
+     *
+     * @var \DateTime 
+     */
+    private $receivingTime;
+    
+    function __construct($rawPayload, Provider $provider) 
+    {
+        $this->rawPayload = $rawPayload;
+        $this->provider = $provider;
+        $this->getReceivingTime() = new \DateTimeImmutable();
+    }
+
+    function rawPayload() 
+    {
+        return $this->rawPayload;
+    }
+
+    function provider(): Provider 
+    {
+        return $this->provider;
+    }
+
+    function receivingTime(): \DateTime 
+    {
+        return $this->receivingTime;
+    }
+
+
 }

@@ -59,7 +59,7 @@ class AbstractIdentifiersFinder
         $identifierBlock = SearchInArray::valueByKey($this->dataToProcess, $search);
         
         if (false !== $identifierBlock && !empty($identifierBlock) ) {            
-            $identifiers->add($identifierBlock, $identifierType);
+            $identifiers->addFromString($identifierBlock, $identifierType);
         }         
     }         
     

@@ -21,12 +21,8 @@ class Identifier
      */
     private $value;
             
-    public static function fromString(string $value, string $type, array $availableTypes = []): self
-    {
-        if(!empty($availableTypes) && !in_array(strtolower($type), $availableTypes)) {
-            throw new IdentifierInvalidArgumentException(sprintf('Wrong identifier type. Available types: %s', implode(',', $availableTypes)));
-        }                 
-        
+    public static function fromString(string $value, string $type): self
+    {        
         return new self($value, $type);
     }
 

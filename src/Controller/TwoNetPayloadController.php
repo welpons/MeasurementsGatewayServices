@@ -12,7 +12,7 @@ use App\MeasurementsGateway\Application\Services\ProcessPayload\ProcessPayloadSe
  */
 class TwoNetPayloadController 
 {
-    public function process(Request $request)
+    public function process(Request $request, MeasurementsBus $measurementsBus)
     {
 //        $payload = $request->get();
         
@@ -23,11 +23,12 @@ class TwoNetPayloadController
 //        }
 //        
 //        $qclData = $decodedData['post'];        
+           
 
-//        $processPayloadService = new ProcessPayloadService($provider, $userDevicesRepository, $healthUserValuesRepository);
-        
 //        try {
-//            $response = $processPayloadService->execute($qclData);
+//          $payloadDTO = new PayloadDTO(Provider::fromString('QCL', 'json'), $qclData);
+//          $processPayloadService = new ProcessPayloadService($registeredDevicesRepository, $userDevicesRepository, $identifiersFinderFactory, $measurementsBus);
+//          $processPayloadService->process($payloadDTO);
 //        } catch (InvalidPayloadException $ex) {
 //            return 
 //        } finally {
