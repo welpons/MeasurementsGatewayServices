@@ -1,7 +1,9 @@
 <?php
 
 
-namespace App\MeasurementsGateway\Domain\Model\Device\User;
+namespace App\MeasurementsGateway\Domain\Model\User;
+
+use App\MeasurementsGateway\Domain\Model\Device\DeviceId;
 
 /**
  * Description of UserId

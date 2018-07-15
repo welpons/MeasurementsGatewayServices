@@ -17,7 +17,8 @@ class InMemoryRegisteredDeviceRepositoryTest extends TestCase
 {
     private $repository;
     
-    public function setUp() {
+    public function setUp() 
+    {
         parent::setUp();
         $this->repository = new InMemoryRegisteredDeviceRepository();
     }
@@ -33,9 +34,75 @@ class InMemoryRegisteredDeviceRepositoryTest extends TestCase
     /**
      * @group infrastructure_persistence_registered_dev_repository
      */
+    public function testFindUnnregisteredDevice() 
+    {
+        $idFoo = DeviceId::create();
+        $deviceToRegisterFoo = $this->createMock(RegisteredDevice::class);
+        $deviceToRegisterFoo->method('id')
+             ->willReturn($idFoo);
+        $this->assertNull($this->repository->deviceOfId($idFoo));
+        
+    }    
+    
+    /**
+     * @group infrastructure_persistence_registered_dev_repository
+     */
     public function testAddRegisteredDevice()
     {
-        $registeredDevice = new RegisteredDevice(DeviceId::create(), ModelId::create(), new \DateTime(), Subscription::create(new \DateTimeImmutable('yesterday'), new \DateTimeImmutable('today')));
-        $this->repository->add($registeredDevice);
+        $id = DeviceId::create('foo');
+        $deviceToRegister = $this->createMock(RegisteredDevice::class);
+        $deviceToRegister->method('id')
+             ->willReturn($id);
+        $this->repository->add($deviceToRegister);
+        $registeredDevice = $this->repository->deviceOfId($id);
+        $this->assertTrue($registeredDevice instanceof RegisteredDevice);
+        $this->assertEquals('foo', $registeredDevice->id());
+    }     
+    
+    /**
+     * @group infrastructure_persistence_registered_dev_repository
+     */
+    public function testAddMultipleRegisteredDevice()
+    {
+        $idFoo = DeviceId::create('foo');
+        $deviceToRegisterFoo = $this->createMock(RegisteredDevice::class);
+        $deviceToRegisterFoo->method('id')
+             ->willReturn($idFoo);
+        $idBar = DeviceId::create('bar');
+        $deviceToRegisterBar = $this->createMock(RegisteredDevice::class);
+        $deviceToRegisterBar->method('id')
+             ->willReturn($idBar);        
+        $this->repository->add($deviceToRegisterFoo);
+        $this->repository->add($deviceToRegisterBar);
+        
+        $repository = new \ReflectionObject($this->repository);
+        $devices = $repository->getProperty('devices');
+        $devices->setAccessible(true); 
+        $devicesArray = $devices->getValue($this->repository);
+        $this->assertTrue(is_array($devicesArray) && 2 == count($devicesArray));        
+    }     
+    
+    /**
+     * @group infrastructure_persistence_registered_dev_repository
+     */
+    public function testRemoveRegisteredDevice()
+    {
+        $idFoo = DeviceId::create('foo');
+        $registeredDevice = $this->createMock(RegisteredDevice::class);
+        $registeredDevice->method('id')
+             ->willReturn($idFoo);
+        $repositoryInMemory = new InMemoryRegisteredDeviceRepository();
+        $repositoryInMemory->add($registeredDevice);
+        $repositoryInMemory->remove($registeredDevice);
+        
+        $repository = new \ReflectionObject($this->repository);
+        $devices = $repository->getProperty('devices');
+        $devices->setAccessible(true); 
+        $devicesArray = $devices->getValue($this->repository);
+        $this->assertTrue(is_array($devicesArray) && 0 == count($devicesArray));        
     }        
+    
+    
+
+            
 }

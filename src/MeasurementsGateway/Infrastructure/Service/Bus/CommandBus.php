@@ -6,11 +6,14 @@
  * and open the template in the editor.
  */
 
+namespace App\MeasurementsGateway\Infrastructure\Service\Bus;
+
 /**
+ * Description of newPHPClass
  *
  * @author felix
  */
-interface DeviceIdentifiersRepository 
+class CommandBus 
 {
-    //put your code here
+
 }

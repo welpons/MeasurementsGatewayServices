@@ -40,7 +40,7 @@ class PayloadDTO implements DTOInterface
     {
         $this->rawPayload = $rawPayload;
         $this->provider = $provider;
-        $this->getReceivingTime() = new \DateTimeImmutable();
+        $this->getReceivingTime = new \DateTimeImmutable();
     }
 
     function rawPayload() 

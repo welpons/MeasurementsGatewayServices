@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use App\MeasurementsGateway\Application\Services\ProcessPayload\ProcessPayloadService;
+use App\MeasurementsGateway\Infrastructure\Service\Bus\CommandBusInterface;
+use App\MeasurementsGateway\Infrastructure\Middleware\MessageBroker\RabbitMQ;
 
 /**
  * TwoNetPayloadController
@@ -12,7 +15,7 @@ use App\MeasurementsGateway\Application\Services\ProcessPayload\ProcessPayloadSe
  */
 class TwoNetPayloadController 
 {
-    public function process(Request $request, MeasurementsBus $measurementsBus)
+    public function process(Request $request, CommandBusInterface $commandBus)
     {
 //        $payload = $request->get();
         
@@ -26,8 +29,9 @@ class TwoNetPayloadController
            
 
 //        try {
+//          TODO: register handlers in command bus
 //          $payloadDTO = new PayloadDTO(Provider::fromString('QCL', 'json'), $qclData);
-//          $processPayloadService = new ProcessPayloadService($registeredDevicesRepository, $userDevicesRepository, $identifiersFinderFactory, $measurementsBus);
+//          $processPayloadService = new ProcessPayloadService($registeredDevicesRepository, $userDevicesRepository, $identifiersFinderFactory, $commandBus);
 //          $processPayloadService->process($payloadDTO);
 //        } catch (InvalidPayloadException $ex) {
 //            return 
@@ -37,5 +41,20 @@ class TwoNetPayloadController
 //                
 //        return 
         // pass transformation to command service with a command bus 
+    }    
+
+    public function index()
+    {
+        // On creer un message et on attend la reponse
+        $generateUrlClient = new RabbitMQ('guest', 'guest');
+
+        $message = new \stdClass;
+        $message->consumer = 'Output';
+        $message->content = 'Felix Pons';
+        
+        $response = $generateUrlClient->publish(serialize($message), '', 'hello');
+       
+        
+        return new Response('Felix Pons');
     }        
 }

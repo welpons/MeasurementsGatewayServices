@@ -1,6 +1,6 @@
 <?php
 
-namespace App\MeasurementsGateway\Domain\Model\UserDevice;
+namespace App\MeasurementsGateway\Domain\Model\Device;
 
 /**
  * Description of UserDevice
