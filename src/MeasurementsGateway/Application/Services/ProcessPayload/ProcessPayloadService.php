@@ -3,7 +3,8 @@
 namespace App\MeasurementsGateway\Application\Services\ProcessPayload;
 
 use App\MeasurementsGateway\Domain\Model\UserDevice\UserDevicesRepositoryInterface;
-use App\MeasurementsGateway\Domain\Model\Device\RegisteredDeviceRespositoryInterface;
+use App\MeasurementsGateway\Domain\Model\Device\DeviceIdentifierRepositoryInterface;
+use App\MeasurementsGateway\Command\MeasurementCommand;
 
 /**
  * This service is in charge to 
@@ -13,17 +14,17 @@ use App\MeasurementsGateway\Domain\Model\Device\RegisteredDeviceRespositoryInter
 class ProcessPayloadService 
 {
     private $userDeviceRepository;
-    private $registeredDevicesRepository;
+    private $deviceIdentifierRepository;
     private $identifiersFinderFactory;
     private $measurementsBus;
     
-    public function __construct(RegisteredDeviceRespositoryInterface $registeredDevicesRepository, 
+    public function __construct(DeviceIdentifierRepositoryInterface $deviceIdentifierRepository, 
             UserDevicesRepositoryInterface $userDevicesRepository, 
             $identifiersFinderFactory,
             MeasurementsBus $measurementsBus) // 
     {
         $this->userDeviceRepository = $userDevicesRepository;
-        $this->registeredDevicesRepository = $registeredDevicesRepository;
+        $this->deviceIdentifierRepository = $deviceIdentifierRepository;
         $this->identifiersFinderFactory = $identifiersFinderFactory;
         $this->measurementsBus = $measurementsBus;
     }              
@@ -35,24 +36,20 @@ class ProcessPayloadService
             $identifiersFinder = $this->identifiersFinderFactory->getFinder($payloadDTO->provider());
             $identifiers = $identifiersFinder->findIdentifiers($payloadDTO->rawPayload());
 
-            // TODO: pending check subscription
+            // TODO: pending check if a device exist with found identifiers
+            $registeredDevice = $this->deviceIdentifiersRepository->deviceWith($identifiers);
             
-            $device = $this->registeredDevicesRepository->find($identifiers);
             
-            if (null === $device) {
-                // TODO: Exception     
-            } 
-            
-            if (!$device->hasSubscription()) {
+            if (!$registeredDevice->hasSubscription()) {
                 // TODO: Exception
             }
             
-            $userDevice = $this->userDeviceRepository->find($device->id());
+            $userDevice = $this->userDeviceRepository->find($registeredDevice->id());
 
             if (null === $userDevice) {
                 // TODO: Exception     
             }  
-            $measurementCommand = new MeasurementCommand($userDevice, $payloadDTO->rawPayload());
+            $measurementCommand = new MeasurementCommand($payloadDTO->provider(), $userDevice, $payloadDTO->rawPayload(), $payloadDTO->receivingTime());
             
             $this->measurementsBus->dispatch($measurementCommand);
         } catch (Exception $ex) {
