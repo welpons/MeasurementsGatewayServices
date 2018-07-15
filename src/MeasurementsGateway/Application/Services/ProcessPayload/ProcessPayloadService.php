@@ -37,7 +37,7 @@ class ProcessPayloadService
             $identifiers = $identifiersFinder->findIdentifiers($payloadDTO->rawPayload());
 
             // TODO: pending check if a device exist with found identifiers
-            $registeredDevice = $this->deviceIdentifiersRepository->deviceWith($identifiers);
+            $registeredDevice = $this->deviceIdentifierRepository->deviceWith($identifiers);
             
             
             if (!$registeredDevice->hasSubscription()) {
