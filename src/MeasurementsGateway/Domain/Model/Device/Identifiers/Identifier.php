@@ -55,6 +55,11 @@ class Identifier
     {
         return $this->value;
     }
+    
+    public function toArray() : array
+    {
+        return ['type' => $this->type, 'value' => $this->value];
+    }    
 
     public function equals($other): bool
     {

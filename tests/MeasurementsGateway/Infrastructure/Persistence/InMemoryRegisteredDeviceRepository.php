@@ -34,6 +34,13 @@ class InMemoryRegisteredDeviceRepository implements RegisteredDeviceRespositoryI
         $this->devices[$device->id()->id()] = $device;
     }
     
+    public function update(RegisteredDevice $device)
+    {
+        if (isset($this->devices[$device->deviceId()->id()])) {
+            $this->devices[$device->deviceId()->id()] = $device;
+        }        
+    }        
+    
     public function remove(RegisteredDevice $device)
     {
         unset($this->devices[$device->id()->id()]);

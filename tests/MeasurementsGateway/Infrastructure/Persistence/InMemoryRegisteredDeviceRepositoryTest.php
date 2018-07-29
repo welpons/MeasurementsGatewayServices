@@ -32,7 +32,7 @@ class InMemoryRegisteredDeviceRepositoryTest extends TestCase
     }  
     
     /**
-     * @group infrastructure_persistence_registered_dev_repository
+     * @group infrastructure_persistence_registered_dev_repository1
      */
     public function testFindUnnregisteredDevice() 
     {

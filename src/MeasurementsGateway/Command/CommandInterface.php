@@ -7,7 +7,7 @@ namespace App\MeasurementsGateway\Command;
  *
  * @author felix
  */
-class CommandInterface 
+interface CommandInterface 
 {
     //put your code here
 }

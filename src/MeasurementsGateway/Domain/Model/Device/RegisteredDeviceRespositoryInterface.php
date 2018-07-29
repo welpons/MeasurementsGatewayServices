@@ -23,6 +23,8 @@ interface RegisteredDeviceRespositoryInterface
    
     public function add(RegisteredDevice $device); 
     
+    public function update(RegisteredDevice $device);
+    
     public function remove(RegisteredDevice $device);
     
     public function findBy(array $criteria);
