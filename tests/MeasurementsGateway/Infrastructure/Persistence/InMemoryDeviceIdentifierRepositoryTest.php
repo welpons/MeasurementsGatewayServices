@@ -5,6 +5,7 @@ namespace App\Tests\MeasurementsGateway\Infrastructure\Persistence;
 use App\MeasurementsGateway\Domain\Model\Device\DeviceIdentifier;
 use App\MeasurementsGateway\Domain\Model\Device\DeviceId;
 use App\MeasurementsGateway\Domain\Model\Device\Identifiers\Identifier;
+use Welpons\MedDevCommon\Domain\Model\Device\Identifiers\IdentifierTypes;
 use App\MeasurementsGateway\Domain\Model\Device\DeviceIdentifierId;
 use PHPUnit\Framework\TestCase;
 
@@ -31,7 +32,7 @@ class InMemoryDeviceIdentifierRepositoryTest extends TestCase
     {
         $deviceId = DeviceId::create('foo');
         $id = DeviceIdentifierId::create();
-        $identifier = Identifier::fromString('SN1234', 'serial_number');
+        $identifier = Identifier::fromString('SN1234', IdentifierTypes::SERIAL_NUMBER);
         $deviceIdentifierToRegister = $this->createMock(DeviceIdentifier::class);
         $deviceIdentifierToRegister->method('id')
              ->willReturn($id);          
@@ -49,7 +50,7 @@ class InMemoryDeviceIdentifierRepositoryTest extends TestCase
     {
         $deviceId = DeviceId::create('foo');
         $id = DeviceIdentifierId::create();
-        $identifier = Identifier::fromString('SN1234', 'serial_number');
+        $identifier = Identifier::fromString('SN1234', IdentifierTypes::SERIAL_NUMBER);
         $deviceIdentifierToRegister = $this->createMock(DeviceIdentifier::class);
         $deviceIdentifierToRegister->method('id')
              ->willReturn($id);          
@@ -70,8 +71,8 @@ class InMemoryDeviceIdentifierRepositoryTest extends TestCase
     public function testAddMultipleDeviceIdentifier()
     {
         $deviceId = DeviceId::create('foo');
-        $SN = Identifier::fromString('SN1234', 'serial_number');
-        $MAC = Identifier::fromString('FA:88:A0', 'mac_address');
+        $SN = Identifier::fromString('SN1234', IdentifierTypes::SERIAL_NUMBER);
+        $MAC = Identifier::fromString('FA:88:A0', IdentifierTypes::MAC_ADDRESS);
         $deviceIdentifierToRegisterSN = $this->createMock(DeviceIdentifier::class);
         $deviceIdentifierToRegisterSN->method('id')
              ->willReturn(DeviceIdentifierId::create());        
@@ -106,7 +107,7 @@ class InMemoryDeviceIdentifierRepositoryTest extends TestCase
     {
         $id = DeviceIdentifierId::create();
         $deviceId = DeviceId::create('foo');
-        $SN = Identifier::fromString('SN1234', 'serial_number');
+        $SN = Identifier::fromString('SN1234', IdentifierTypes::SERIAL_NUMBER);
         $deviceIdentifierToRegisterSN = $this->createMock(DeviceIdentifier::class);
         $deviceIdentifierToRegisterSN->method('id')
              ->willReturn($id);        

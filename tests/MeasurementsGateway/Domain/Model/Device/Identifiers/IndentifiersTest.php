@@ -5,7 +5,7 @@ namespace App\Tests\MeasurementsGateway\Domain\Model\Device\Identifiers;
 use PHPUnit\Framework\TestCase;
 use App\MeasurementsGateway\Domain\Model\Device\Identifiers\Identifier;
 use App\MeasurementsGateway\Domain\Model\Device\Identifiers\Identifiers;
-use App\MeasurementsGateway\Domain\Model\Device\Identifiers\IdentifierTypes;
+use Welpons\MedDevCommon\Domain\Model\Device\Identifiers\IdentifierTypes;
 /**
  * Description of IndentifiersTest
  *

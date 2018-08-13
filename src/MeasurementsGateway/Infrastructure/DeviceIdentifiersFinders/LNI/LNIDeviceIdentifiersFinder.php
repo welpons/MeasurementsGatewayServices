@@ -5,7 +5,7 @@ namespace App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders\LNI;
 use App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders\AbstractIdentifiersFinder;
 use App\MeasurementsGateway\Infrastructure\DeviceIdentifiersFinders\IdentifiersFinderInterface;
 use App\MeasurementsGateway\Domain\Model\Device\Identifiers\Identifiers;
-use App\MeasurementsGateway\Domain\Model\Device\Identifiers\IdentifierTypes;
+use Welpons\MedDevCommon\Domain\Model\Device\Identifiers\IdentifierTypes;
 
 /**
  * Searches device identifiers inside measurements payload

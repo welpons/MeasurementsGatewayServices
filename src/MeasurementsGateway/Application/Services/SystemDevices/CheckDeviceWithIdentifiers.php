@@ -44,7 +44,7 @@ class CheckDeviceWithIdentifiers implements CheckDeviceWithIdentifiersInterface
     {
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $$this->url;
+        curl_setopt($ch, CURLOPT_URL, $this->url);
 
 	// For xml, change the content-type.
 	curl_setopt ($ch, CURLOPT_HTTPHEADER, Array("Content-Type: text/xml"));

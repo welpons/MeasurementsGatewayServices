@@ -11,7 +11,7 @@ use App\MeasurementsGateway\Application\Services\SystemDevices\CheckDeviceWithId
 use App\MeasurementsGateway\Application\Services\SystemDevices\CheckDeviceWithIdentifiersInterface;
 use App\MeasurementsGateway\Domain\Model\Device\Identifiers\Identifier;
 use App\MeasurementsGateway\Domain\Model\Device\Identifiers\Identifiers;
-use App\MeasurementsGateway\Domain\Model\Device\Identifiers\IdentifierTypes;
+use Welpons\MedDevCommon\Domain\Model\Device\Identifiers\IdentifierTypes;
 
 /**
  * Description of CheckDeviceWithIdentifiersTest

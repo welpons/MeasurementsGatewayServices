@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b637b2376ad5df9568fe22c84b07438f",
+    "content-hash": "739c0c8eaac7ec1324b4502709f68948",
     "packages": [
         {
             "name": "php-amqplib/php-amqplib",
@@ -1656,6 +1656,39 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2018-05-30T07:26:09+00:00"
+        },
+        {
+            "name": "welpons/meddevcommon",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/welpons/MedDevCommon.git",
+                "reference": "aa95704ae98e087e524e255d521a1f7eeb61eed5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/welpons/MedDevCommon/zipball/aa95704ae98e087e524e255d521a1f7eeb61eed5",
+                "reference": "aa95704ae98e087e524e255d521a1f7eeb61eed5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Welpons\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Felix Pons",
+                    "email": "welpons@gmail.com"
+                }
+            ],
+            "description": "A common library for all medical device microservices",
+            "time": "2018-08-13T11:38:51+00:00"
         }
     ],
     "packages-dev": [
@@ -1786,7 +1819,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "symfony/lts": 20
+        "symfony/lts": 20,
+        "welpons/meddevcommon": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

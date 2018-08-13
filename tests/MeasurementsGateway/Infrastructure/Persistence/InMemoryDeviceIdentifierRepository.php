@@ -79,7 +79,7 @@ class InMemoryDeviceIdentifierRepository implements DeviceIdentifierRepositoryIn
         $this->deviceIdentifiers[$deviceIdentifier->id()->id()] = $deviceIdentifier;           
     }
     
-    public function updates(DeviceIdentifier $deviceIdentifier)
+    public function update(DeviceIdentifier $deviceIdentifier)
     {
         
     }        
